@@ -74,6 +74,13 @@
   --font-weight-preset-4: 500;
   --font-weight-preset-5: 400;
   --font-weight-preset-6: 500;
+
+  /* Theme light (default) */
+  --body-bg: var(--gradient-light);
+  --header-bg-clr: var(--color-neutral-0);
+  --header-border-clr: var(--color-neutral-200);
+  --header-box-shadow-clr: #d9e5f4;
+  --tgl-theme-btn-bg-clr: var(--color-neutral-100);
 }
 
 /* Typography */
@@ -111,21 +118,58 @@
   line-height: var(--line-height-preset-3);
   letter-spacing: var(--letter-spacing-preset-3);
 }
+
 .text-preset-4 {
   font-size: var(--font-size-preset-4);
   font-weight: var(--font-weight-preset-4);
   line-height: var(--line-height-preset-4);
   letter-spacing: var(--letter-spacing-preset-4);
 }
+
 .text-preset-5 {
   font-size: var(--font-size-preset-5);
   font-weight: var(--font-weight-preset-5);
   line-height: var(--line-height-preset-5);
   letter-spacing: var(--letter-spacing-preset-5);
 }
+
 .text-preset-6 {
   font-size: var(--font-size-preset-6);
   font-weight: var(--font-weight-preset-6);
   line-height: var(--line-height-preset-6);
   letter-spacing: var(--letter-spacing-preset-6);
+}
+
+/* Mobile Layout */
+body {
+  background: var(--body-bg);
+  padding-inline: var(--spacing-200);
+  padding-block: var(--spacing-250) var(--spacing-800);
+}
+
+.header-container {
+  margin-block-end: var(--spacing-500);
+  padding-block: var(--spacing-100);
+  padding-inline: var(--spacing-150);
+  border-radius: var(--spacing-125);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--header-bg-clr);
+  border: 0.0625rem solid var(--header-border-clr);
+  box-shadow: 0 0.125rem 0.1875rem var(--header-box-shadow-clr);
+}
+
+.logo-container {
+  height: 2.5625rem;
+}
+
+.tgl-theme-btn {
+  all: unset;
+  cursor: pointer;
+  box-sizing: border-box;
+  height: 3.125rem;
+  padding: 0.875rem;
+  border-radius: var(--spacing-150);
+  background-color: var(--tgl-theme-btn-bg-clr);
 }
