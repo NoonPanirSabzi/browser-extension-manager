@@ -16,59 +16,62 @@
     <title>Browser extensions manager UI</title>
   </head>
   <body>
-    <!-- 
-  Extensions List
-
-  All
-  Active
-  Inactive
-
-  DevLens
-  Quickly inspect page layouts and visualize element boundaries.
-  Remove
-
-  StyleSpy
-  Instantly analyze and copy CSS from any webpage element.
-  Remove
-
-  SpeedBoost
-  Optimizes browser resource usage to accelerate page loading.
-  Remove
-
-  JSONWizard
-  Formats, validates, and prettifies JSON responses in-browser.
-  Remove
-
-  TabMaster Pro
-  Organizes browser tabs into groups and sessions.
-  Remove
-
-  ViewportBuddy
-  Simulates various screen resolutions directly within the browser.
-  Remove
-
-  Markup Notes
-  Enables annotation and notes directly onto webpages for collaborative debugging.
-  Remove
-
-  GridGuides
-  Overlay customizable grids and alignment guides on any webpage.
-  Remove
-
-  Palette Picker
-  Instantly extracts color palettes from any webpage.
-  Remove
-
-  LinkChecker
-  Scans and highlights broken links on any page.
-  Remove
-
-  DOM Snapshot
-  Capture and export DOM structures quickly.
-  Remove
-
-  ConsolePlus
-  Enhanced developer console with advanced filtering and logging.
-  Remove -->
+    <header>
+      <div class="header-container">
+        <div class="logo-container">
+          <picture>
+            <source srcset="" data-theme="" />
+            <source
+              media="(prefers-color-scheme: dark)"
+              srcset="./assets/images/page-logo-dark.svg"
+            />
+            <img src="./assets/images/page-logo.svg" alt="site logo" />
+          </picture>
+        </div>
+        <button type="button" class="tgl-theme-btn">
+          <picture>
+            <source srcset="" data-theme="" />
+            <source
+              media="(prefers-color-scheme: dark)"
+              srcset="./assets/images/icon-sun.svg"
+            />
+            <img src="./assets/images/icon-moon.svg" alt="switch to dark" />
+          </picture>
+        </button>
+      </div>
+    </header>
+    <main>
+      <section class="options">
+        <h1>Extensions List</h1>
+        <div class="filters-container">
+          <button type="button">All</button>
+          <button type="button">Active</button>
+          <button type="button">Inactive</button>
+          <button type="button">Removed</button>
+        </div>
+      </section>
+      <section id="installed-extensions">
+        <article class="extension-card">
+          <div class="extension-card__info">
+            <div class="flex-row">
+              <img src="./assets/images/logo-devlens.svg" alt="devlens logo" />
+              <div class="flex-clmn">
+                <h2>DevLens</h2>
+                <p>
+                  Quickly inspect page layouts and visualize element boundaries.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="extension-card__actions">
+            <button type="button">Remove</button>
+            <!-- switch toggle in here! -->
+          </div>
+        </article>
+      </section>
+      <section id="removed-extensions">
+        <article></article>
+      </section>
+    </main>
   </body>
 </html>
