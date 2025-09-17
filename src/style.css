@@ -1,0 +1,131 @@
+:root {
+  /* Color */
+  --color-neutral-900: #091540;
+  --color-neutral-800: #202535;
+  --color-neutral-700: #2f364b;
+  --color-neutral-600: #535868;
+  --color-neutral-300: #c6c6c6;
+  --color-neutral-200: #d6e2f5;
+  --color-neutral-100: #eeeeee;
+  --color-neutral-0: #fbfdfe;
+  --color-red-400: #f25c54;
+  --color-red-500: #de4840;
+  --color-red-700: #c7231a;
+  --gradient-light: linear-gradient(180deg, #ebf2fc 0%, #eefbf9 100%);
+  --gradient-dark: linear-gradient(180deg, #04091b 0%, #091540 100%);
+
+  /* Spacing */
+  --spacing-0: 0rem;
+  --spacing-025: 0.125rem;
+  --spacing-050: 0.25rem;
+  --spacing-075: 0.375rem;
+  --spacing-100: 0.5rem;
+  --spacing-125: 0.625rem;
+  --spacing-150: 0.75rem;
+  --spacing-200: 1rem;
+  --spacing-250: 1.25rem;
+  --spacing-300: 1.5rem;
+  --spacing-400: 2rem;
+  --spacing-500: 2.5rem;
+  --spacing-600: 3rem;
+  --spacing-800: 4rem;
+  --spacing-1000: 5rem;
+
+  /* Radius */
+  --radius-0: 0;
+  --radius-4: 0.25rem;
+  --radius-6: 0.375rem;
+  --radius-8: 0.5rem;
+  --radius-10: 0.625rem;
+  --radius-12: 0.75rem;
+  --radius-16: 1rem;
+  --radius-20: 1.25rem;
+  --radius-24: 1.5rem;
+  --radius-full: 62.4375rem;
+
+  /* Font sizes */
+  --font-size-preset-1: 2.125rem;
+  --font-size-preset-2: 1.25rem;
+  --font-size-preset-3: 1.25rem;
+  --font-size-preset-4: 1.25rem;
+  --font-size-preset-5: 1rem;
+  --font-size-preset-6: 1rem;
+
+  /* Line height */
+  --line-height-preset-1: 1;
+  --line-height-preset-2: 1.2;
+  --line-height-preset-3: 1.4;
+  --line-height-preset-4: 1.4;
+  --line-height-preset-5: 1.4;
+  --line-height-preset-6: 1.4;
+
+  /* letter spacing */
+  --letter-spacing-preset-1: -0.0625rem;
+  --letter-spacing-preset-2: -0.0125rem;
+  --letter-spacing-preset-3: -0.0187rem;
+  --letter-spacing-preset-4: -0.0187rem;
+  --letter-spacing-preset-5: -0.0313rem;
+  --letter-spacing-preset-6: -0.0313rem;
+
+  /* Font Weight */
+  --font-weight-preset-1: 700;
+  --font-weight-preset-2: 700;
+  --font-weight-preset-3: 400;
+  --font-weight-preset-4: 500;
+  --font-weight-preset-5: 400;
+  --font-weight-preset-6: 500;
+}
+
+/* Typography */
+:where(
+    .text-preset-1,
+    .text-preset-2,
+    .text-preset-3,
+    .text-preset-4,
+    .text-preset-5,
+    .text-preset-6
+  ) {
+  font-family: "Noto Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
+.text-preset-1 {
+  font-size: var(--font-size-preset-1);
+  font-weight: var(--font-weight-preset-1);
+  line-height: var(--line-height-preset-1);
+  letter-spacing: var(--letter-spacing-preset-1);
+}
+
+.text-preset-2 {
+  font-size: var(--font-size-preset-2);
+  font-weight: var(--font-weight-preset-2);
+  line-height: var(--line-height-preset-2);
+  letter-spacing: var(--letter-spacing-preset-2);
+}
+
+.text-preset-3 {
+  font-size: var(--font-size-preset-3);
+  font-weight: var(--font-weight-preset-3);
+  line-height: var(--line-height-preset-3);
+  letter-spacing: var(--letter-spacing-preset-3);
+}
+.text-preset-4 {
+  font-size: var(--font-size-preset-4);
+  font-weight: var(--font-weight-preset-4);
+  line-height: var(--line-height-preset-4);
+  letter-spacing: var(--letter-spacing-preset-4);
+}
+.text-preset-5 {
+  font-size: var(--font-size-preset-5);
+  font-weight: var(--font-weight-preset-5);
+  line-height: var(--line-height-preset-5);
+  letter-spacing: var(--letter-spacing-preset-5);
+}
+.text-preset-6 {
+  font-size: var(--font-size-preset-6);
+  font-weight: var(--font-weight-preset-6);
+  line-height: var(--line-height-preset-6);
+  letter-spacing: var(--letter-spacing-preset-6);
+}
