@@ -78,12 +78,13 @@
   /* Theme light (default) */
   --body-bg: var(--gradient-light);
   --header-bg-clr: var(--color-neutral-0);
-  --header-border-clr: var(--color-neutral-200);
-  --header-box-shadow-clr: #d9e5f4;
+  --header-border: 0.0625rem solid var(--color-neutral-200);
+  --header-box-shadow: 0 0.125rem 0.1875rem #d9e5f4;
   --tgl-theme-btn-bg-clr: var(--color-neutral-100);
   --heading-and-btn-clr: var(--color-neutral-900);
   --filter-tab-bg-clr: var(--color-neutral-0);
-  --filter-tab-border-clr: var(--color-neutral-200);
+  --filter-tab-box-shadow: 0 0.0625rem 0.125rem rgba(184, 196, 215, 0.4);
+  --filter-tab-border: 0.0625rem solid var(--color-neutral-200);
   --filter-tab-selected-bg-clr: var(--color-red-700);
   --filter-tab-selected-clr: var(--color-neutral-0);
   --removed-tab-before-clr: var(--color-neutral-0);
@@ -164,8 +165,8 @@ body {
   justify-content: space-between;
   align-items: center;
   background-color: var(--header-bg-clr);
-  border: 0.0625rem solid var(--header-border-clr);
-  box-shadow: 0 0.125rem 0.1875rem var(--header-box-shadow-clr);
+  border: var(--header-border);
+  box-shadow: var(--header-box-shadow);
 }
 
 .logo-container {
@@ -206,8 +207,8 @@ h1 {
 .filter-tab {
   color: var(--heading-and-btn-clr);
   background-color: var(--filter-tab-bg-clr);
-  box-shadow: 0 0.0625rem 0.125rem rgba(184, 196, 215, 0.4);
-  border: 0.0625rem solid var(--filter-tab-border-clr);
+  box-shadow: var(--filter-tab-box-shadow);
+  border: var(--filter-tab-border);
   padding-inline: var(--spacing-250);
   padding-block: var(--spacing-100) var(--spacing-125);
   border-radius: var(--radius-full);
@@ -242,6 +243,6 @@ h1 {
 .removed-tab.filter-tab--selected > span {
   background-color: var(--removed-tab-before-selected-bg-clr);
   color: var(--removed-tab-before-selected-clr);
-  border: 0.0625rem solid var(--filter-tab-border-clr);
+  border: var(--filter-tab-border);
   box-shadow: 0 0.0625rem 0.125rem rgb(184, 196, 215);
 }
