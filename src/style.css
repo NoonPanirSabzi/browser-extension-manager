@@ -81,6 +81,15 @@
   --header-border-clr: var(--color-neutral-200);
   --header-box-shadow-clr: #d9e5f4;
   --tgl-theme-btn-bg-clr: var(--color-neutral-100);
+  --heading-and-btn-clr: var(--color-neutral-900);
+  --filter-tab-bg-clr: var(--color-neutral-0);
+  --filter-tab-border-clr: var(--color-neutral-200);
+  --filter-tab-selected-bg-clr: var(--color-red-700);
+  --filter-tab-selected-clr: var(--color-neutral-0);
+  --removed-tab-before-clr: var(--color-neutral-0);
+  --removed-tab-before-bg-clr: var(--color-red-700);
+  --removed-tab-before-selected-bg-clr: var(--color-neutral-0);
+  --removed-tab-before-selected-clr: var(--color-neutral-900)
 }
 
 /* Typography */
@@ -148,10 +157,9 @@ body {
 }
 
 .header-container {
-  margin-block-end: var(--spacing-500);
   padding-block: var(--spacing-100);
   padding-inline: var(--spacing-150);
-  border-radius: var(--spacing-125);
+  border-radius: var(--radius-10);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -170,6 +178,70 @@ body {
   box-sizing: border-box;
   height: 3.125rem;
   padding: 0.875rem;
-  border-radius: var(--spacing-150);
+  border-radius: var(--radius-12);
   background-color: var(--tgl-theme-btn-bg-clr);
+}
+
+.options {
+  display: flex;
+  flex-flow: row wrap;
+  row-gap: var(--spacing-300);
+  margin-block: var(--spacing-500);
+}
+
+h1 {
+  inline-size: 100%;
+  color: var(--heading-and-btn-clr);
+  text-align: center;
+}
+
+.filters-container {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 0.875rem;
+  justify-content: space-around;
+  margin-inline: auto;
+}
+
+.filter-tab {
+  color: var(--heading-and-btn-clr);
+  background-color: var(--filter-tab-bg-clr);
+  box-shadow: 0 0.0625rem 0.125rem rgba(184, 196, 215, 0.4);
+  border: 0.0625rem solid var(--filter-tab-border-clr);
+  padding-inline: var(--spacing-250);
+  padding-block: var(--spacing-100) var(--spacing-125);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+}
+
+.filter-tab--selected {
+  color: var(--filter-tab-selected-clr);
+  background-color: var(--filter-tab-selected-bg-clr);
+  border: none;
+  box-shadow: none;
+}
+
+.removed-tab {
+  position: relative;
+}
+
+.removed-tab > span {
+  inline-size: 1.5rem;
+  background-color: var(--removed-tab-before-bg-clr);
+  color: var(--removed-tab-before-clr);
+  font-size: 0.9375rem;
+  padding: var(--spacing-025);
+  border-radius: var(--radius-6);
+  position: absolute;
+  top: -50%;
+  right: 0;
+  transform: translate(25%, 50%);
+  display: block;
+}
+
+.removed-tab.filter-tab--selected > span {
+  background-color: var(--removed-tab-before-selected-bg-clr);
+  color: var(--removed-tab-before-selected-clr);
+  border: 0.0625rem solid var(--filter-tab-border-clr);
+  box-shadow: 0 0.0625rem 0.125rem rgb(184, 196, 215);
 }
