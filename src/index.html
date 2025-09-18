@@ -56,22 +56,25 @@
           <button type="button" class="filter-tab text-preset-3 removed-tab"><span>0</span>Removed</button>
         </div>
       </section>
-      <section id="installed-extensions">
-        <article class="extension-card">
-          <div class="extension-card__info">
-            <div class="flex-row">
-              <img src="./assets/images/logo-devlens.svg" alt="devlens logo" />
-              <div class="flex-clmn">
-                <h2>DevLens</h2>
-                <p>
-                  Quickly inspect page layouts and visualize element boundaries.
-                </p>
-              </div>
+      <section id="installed-extensions" class="extentions-container">
+        <article class="ex-card">
+          <div class="ex-card__info">
+            <img src="./assets/images/logo-devlens.svg" alt="devlens logo" />
+            <div class="flex-clmn">
+              <h2 class="text-preset-2">DevLens</h2>
+              <p class="text-preset-5">
+                Quickly inspect page layouts and visualize element boundaries.
+              </p>
             </div>
           </div>
-          <div class="extension-card__actions">
-            <button type="button">Remove</button>
-            <!-- switch toggle in here! -->
+          <div class="ex-card__actions">
+            <button type="button" class="ex-card-remove-btn text-preset-6">
+              Remove
+            </button>
+            <label class="toggle-switch">
+              <input type="checkbox" />
+              <span class="slider"></span>
+            </label>
           </div>
         </article>
       </section>

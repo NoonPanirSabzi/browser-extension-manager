@@ -90,7 +90,13 @@
   --removed-tab-before-clr: var(--color-neutral-0);
   --removed-tab-before-bg-clr: var(--color-red-700);
   --removed-tab-before-selected-bg-clr: var(--color-neutral-0);
-  --removed-tab-before-selected-clr: var(--color-neutral-900)
+  --removed-tab-before-selected-clr: var(--color-neutral-900);
+  --ex-card-bg-clr: var(--color-neutral-0);
+  --ex-card-border: 0.0625rem solid var(--color-neutral-200);
+  --ex-card-box-shadow: 0 0.125rem 0.125rem 0 rgba(194, 206, 225, 0.2),
+    0 0.0625rem 0.3125rem 0.0625rem rgba(194, 206, 225, 0.22);
+  --ex-card-p-clr: var(--color-neutral-600);
+  --ex-card-remove-btn-border: 0.0625rem solid var(--color-neutral-300);
 }
 
 /* Typography */
@@ -245,4 +251,112 @@ h1 {
   color: var(--removed-tab-before-selected-clr);
   border: var(--filter-tab-border);
   box-shadow: 0 0.0625rem 0.125rem rgb(184, 196, 215);
+}
+
+.extentions-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-125);
+  inline-size: fit-content;
+  margin-inline: auto;
+}
+
+.ex-card {
+  max-inline-size: 23.875rem;
+  min-block-size: 12.5rem;
+  padding: var(--spacing-250);
+  background-color: var(--color-neutral-0);
+  border: var(--ex-card-border);
+  border-radius: var(--radius-20);
+  box-shadow: var(--ex-card-box-shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.ex-card__info {
+  display: flex;
+  flex-direction: row;
+  column-gap: var(--spacing-200);
+}
+
+.ex-card__info > img {
+  align-self: flex-start;
+}
+
+.ex-card__info h2 {
+  color: var(--heading-and-btn-clr);
+}
+
+.ex-card p {
+  color: var(--ex-card-p-clr);
+}
+
+.flex-clmn {
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--spacing-100);
+}
+
+.ex-card__actions {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ex-card-remove-btn {
+  background-color: transparent;
+  padding-inline: var(--spacing-200);
+  padding-block: var(--spacing-100);
+  border-radius: var(--radius-full);
+  border: var(--ex-card-remove-btn-border);
+  color: var(--heading-and-btn-clr);
+  cursor: pointer;
+}
+
+.toggle-switch {
+  inline-size: 2.25rem;
+  block-size: 1.25rem;
+  position: relative;
+  cursor: pointer;
+}
+
+.toggle-switch > input {
+  appearance: none;
+}
+
+.toggle-switch > .slider {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: var(--radius-full);
+  background-color: var(--color-neutral-300);
+  transition: background-color ease-in-out 0.3s;
+}
+
+.toggle-switch > .slider::before {
+  content: "";
+  position: absolute;
+  left: 0.125rem;
+  top: 0.125rem;
+  background-color: var(--color-neutral-0);
+  inline-size: 1rem;
+  block-size: 1rem;
+  border-radius: 50%;
+  box-shadow: 0 0.0625rem 0.1875rem 0 rgba(10, 13, 18, 0.15),
+    0 0.0625rem 0.125rem -0.0625rem rgba(10, 13, 18, 0.15);
+  transition: left ease-in-out 0.2s;
+}
+
+.toggle-switch > input:checked + .slider::before {
+  left: 1.125rem;
+  box-shadow: 0 0.0625rem 0.1875rem 0 rgba(10, 13, 18, 0.3),
+    0 0.0625rem 0.125rem -0.0625rem rgba(10, 13, 18, 0.3);
+}
+
+.toggle-switch > input:checked + .slider {
+  background-color: var(--color-red-700);
 }
