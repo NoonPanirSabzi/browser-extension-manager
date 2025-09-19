@@ -81,12 +81,15 @@
   --header-border: 0.0625rem solid var(--color-neutral-200);
   --header-box-shadow: 0 0.125rem 0.1875rem #d9e5f4;
   --tgl-theme-btn-bg-clr: var(--color-neutral-100);
+  --tgl-theme-btn-hover-bg-clr: var(--color-neutral-300);
   --heading-and-btn-clr: var(--color-neutral-900);
   --filter-tab-bg-clr: var(--color-neutral-0);
   --filter-tab-box-shadow: 0 0.0625rem 0.125rem rgba(184, 196, 215, 0.4);
   --filter-tab-border: 0.0625rem solid var(--color-neutral-200);
   --filter-tab-selected-bg-clr: var(--color-red-700);
   --filter-tab-selected-clr: var(--color-neutral-0);
+  --filter-tab-hover-bg-clr: rgba(251, 253, 254, 0.3);
+  --filter-tab-hover-clr: rgba(9, 21, 64, 0.7);
   --removed-tab-before-clr: var(--color-neutral-0);
   --removed-tab-before-bg-clr: var(--color-red-700);
   --removed-tab-before-selected-bg-clr: var(--color-neutral-0);
@@ -97,6 +100,8 @@
     0 0.0625rem 0.3125rem 0.0625rem rgba(194, 206, 225, 0.22);
   --ex-card-p-clr: var(--color-neutral-600);
   --ex-card-remove-btn-border: 0.0625rem solid var(--color-neutral-300);
+  --ex-card-remove-btn-hover-bg-clr: var(--color-red-700);
+  --ex-card-remove-btn-hover-clr: var(--color-neutral-0);
 }
 
 /* Typography */
@@ -263,6 +268,10 @@ h1 {
   background-color: var(--tgl-theme-btn-bg-clr);
 }
 
+.tgl-theme-btn:hover {
+  background-color: var(--tgl-theme-btn-hover-bg-clr);
+}
+
 .filter-tab {
   color: var(--heading-and-btn-clr);
   background-color: var(--filter-tab-bg-clr);
@@ -279,6 +288,15 @@ h1 {
   background-color: var(--filter-tab-selected-bg-clr);
   border: none;
   box-shadow: none;
+}
+
+.filter-tab:not(.filter-tab--selected):hover {
+  background-color: var(--filter-tab-hover-bg-clr);
+  color: var(--filter-tab-hover-clr);
+}
+
+.filter-tab--selected:hover {
+  background-color: var(--color-red-500);
 }
 
 .removed-tab {
@@ -314,6 +332,12 @@ h1 {
   border: var(--ex-card-remove-btn-border);
   color: var(--heading-and-btn-clr);
   cursor: pointer;
+}
+
+.ex-card-remove-btn:hover {
+  border-color: transparent;
+  background-color: var(--ex-card-remove-btn-hover-bg-clr);
+  color: var(--ex-card-remove-btn-hover-clr);
 }
 
 .toggle-switch {
@@ -360,4 +384,17 @@ h1 {
 
 .toggle-switch > input:checked + .slider {
   background-color: var(--color-red-700);
+}
+
+.toggle-switch:hover > input:checked + .slider {
+  background-color: var(--color-red-500);
+}
+
+:is(.tgl-theme-btn, .filter-tab, .ex-card-remove-btn):focus-visible,
+.toggle-switch > input:focus-visible + .slider {
+  border-color: transparent;
+  outline-offset: 0.125rem;
+  outline-width: 0.125rem;
+  outline-style: solid;
+  outline-color: var(--color-red-400);
 }
