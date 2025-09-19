@@ -179,16 +179,6 @@ body {
   height: 2.5625rem;
 }
 
-.tgl-theme-btn {
-  all: unset;
-  cursor: pointer;
-  box-sizing: border-box;
-  height: 3.125rem;
-  padding: 0.875rem;
-  border-radius: var(--radius-12);
-  background-color: var(--tgl-theme-btn-bg-clr);
-}
-
 .options {
   display: flex;
   flex-flow: row wrap;
@@ -208,49 +198,6 @@ h1 {
   gap: 0.875rem;
   justify-content: space-around;
   margin-inline: auto;
-}
-
-.filter-tab {
-  color: var(--heading-and-btn-clr);
-  background-color: var(--filter-tab-bg-clr);
-  box-shadow: var(--filter-tab-box-shadow);
-  border: var(--filter-tab-border);
-  padding-inline: var(--spacing-250);
-  padding-block: var(--spacing-100) var(--spacing-125);
-  border-radius: var(--radius-full);
-  cursor: pointer;
-}
-
-.filter-tab--selected {
-  color: var(--filter-tab-selected-clr);
-  background-color: var(--filter-tab-selected-bg-clr);
-  border: none;
-  box-shadow: none;
-}
-
-.removed-tab {
-  position: relative;
-}
-
-.removed-tab > span {
-  inline-size: 1.5rem;
-  background-color: var(--removed-tab-before-bg-clr);
-  color: var(--removed-tab-before-clr);
-  font-size: 0.9375rem;
-  padding: var(--spacing-025);
-  border-radius: var(--radius-6);
-  position: absolute;
-  top: -50%;
-  right: 0;
-  transform: translate(25%, 50%);
-  display: block;
-}
-
-.removed-tab.filter-tab--selected > span {
-  background-color: var(--removed-tab-before-selected-bg-clr);
-  color: var(--removed-tab-before-selected-clr);
-  border: var(--filter-tab-border);
-  box-shadow: 0 0.0625rem 0.125rem rgb(184, 196, 215);
 }
 
 .extentions-container {
@@ -303,6 +250,60 @@ h1 {
   flex-flow: row;
   justify-content: space-between;
   align-items: center;
+}
+
+/* Interactive Components */
+.tgl-theme-btn {
+  all: unset;
+  cursor: pointer;
+  box-sizing: border-box;
+  height: 3.125rem;
+  padding: 0.875rem;
+  border-radius: var(--radius-12);
+  background-color: var(--tgl-theme-btn-bg-clr);
+}
+
+.filter-tab {
+  color: var(--heading-and-btn-clr);
+  background-color: var(--filter-tab-bg-clr);
+  box-shadow: var(--filter-tab-box-shadow);
+  border: var(--filter-tab-border);
+  padding-inline: var(--spacing-250);
+  padding-block: var(--spacing-100) var(--spacing-125);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+}
+
+.filter-tab--selected {
+  color: var(--filter-tab-selected-clr);
+  background-color: var(--filter-tab-selected-bg-clr);
+  border: none;
+  box-shadow: none;
+}
+
+.removed-tab {
+  position: relative;
+}
+
+.removed-tab > span {
+  inline-size: 1.5rem;
+  background-color: var(--removed-tab-before-bg-clr);
+  color: var(--removed-tab-before-clr);
+  font-size: 0.9375rem;
+  padding: var(--spacing-025);
+  border-radius: var(--radius-6);
+  position: absolute;
+  top: -50%;
+  right: 0;
+  transform: translate(25%, 50%);
+  display: block;
+}
+
+.removed-tab.filter-tab--selected > span {
+  background-color: var(--removed-tab-before-selected-bg-clr);
+  color: var(--removed-tab-before-selected-clr);
+  border: var(--filter-tab-border);
+  box-shadow: 0 0.0625rem 0.125rem rgb(184, 196, 215);
 }
 
 .ex-card-remove-btn {
