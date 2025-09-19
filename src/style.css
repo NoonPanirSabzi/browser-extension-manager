@@ -400,3 +400,36 @@ h1 {
   outline-style: solid;
   outline-color: var(--color-red-400);
 }
+
+/* Tablet Layout */
+@media (min-width: 48em) {
+  body {
+    padding-inline: var(--spacing-400);
+    padding-block-start: var(--spacing-300);
+  }
+
+  .header-container {
+    padding-block: var(--spacing-150);
+    padding-inline: var(--spacing-200);
+  }
+
+  .options {
+    margin-block-end: var(--spacing-400);
+    row-gap: unset;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  h1 {
+    inline-size: fit-content;
+  }
+
+  .filters-container {
+    gap: var(--spacing-150);
+    margin-inline: unset;
+  }
+
+  .extentions-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
