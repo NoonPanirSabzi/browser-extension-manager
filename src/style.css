@@ -104,6 +104,7 @@
   --ex-card-remove-btn-hover-clr: var(--color-neutral-0);
   --ex-card-toggle-switch-bg-clr: var(--color-neutral-300);
   --ex-card-toggle-switch-checked-bg-clr: var(--color-red-700);
+  --btns-focus-visible-bg-clr: var(--color-neutral-100);
 }
 
 /* Typography */
@@ -399,6 +400,14 @@ h1 {
   outline-width: 0.125rem;
   outline-style: solid;
   outline-color: var(--color-red-400);
+}
+
+:where(
+    .tgl-theme-btn,
+    .filter-tab:not(.filter-tab--selected),
+    .ex-card-remove-btn
+  ):focus-visible {
+  background-color: var(--btns-focus-visible-bg-clr);
 }
 
 /* Tablet Layout */
