@@ -18,6 +18,7 @@
     />
     <link rel="stylesheet" href="reset.css" />
     <link rel="stylesheet" href="style.css" />
+    <script src="main.js" defer></script>
 
     <title>Browser extensions manager UI</title>
   </head>
@@ -50,10 +51,34 @@
       <section class="options">
         <h1 class="text-preset-1">Extensions List</h1>
         <div class="filters-container">
-          <button type="button" class="filter-tab text-preset-4 filter-tab--selected">All</button>
-          <button type="button" class="filter-tab text-preset-3">Active</button>
-          <button type="button" class="filter-tab text-preset-3">Inactive</button>
-          <button type="button" class="filter-tab text-preset-3 removed-tab"><span>0</span>Removed</button>
+          <button
+            type="button"
+            class="filter-tab text-preset-4 filter-tab--selected"
+            id="filter-all"
+          >
+            All
+          </button>
+          <button
+            type="button"
+            class="filter-tab text-preset-3"
+            id="filter-active"
+          >
+            Active
+          </button>
+          <button
+            type="button"
+            class="filter-tab text-preset-3"
+            id="filter-inactive"
+          >
+            Inactive
+          </button>
+          <button
+            type="button"
+            class="filter-tab text-preset-3 removed-tab"
+            id="filter-removed"
+          >
+            <span>0</span>Removed
+          </button>
         </div>
       </section>
       <section id="installed-extensions" class="extentions-container">
