@@ -433,3 +433,25 @@ h1 {
     grid-template-columns: 1fr 1fr;
   }
 }
+
+/* Desktop Layout */
+@media (min-width: 75em) {
+  body {
+    padding-inline: unset;
+    padding-block: var(--spacing-500) var(--spacing-800);
+  }
+
+  header,
+  main {
+    max-inline-size: 73.125rem;
+    margin-inline: auto;
+  }
+
+  .options {
+    margin-block-start: var(--spacing-800);
+  }
+
+  .extentions-container {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
