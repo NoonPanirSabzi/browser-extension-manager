@@ -166,6 +166,7 @@
 
 /* Mobile Layout */
 body {
+  min-block-size: 100vh;
   background: var(--body-bg);
   padding-inline: var(--spacing-200);
   padding-block: var(--spacing-250) var(--spacing-800);
