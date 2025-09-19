@@ -235,15 +235,15 @@ h1 {
   column-gap: var(--spacing-200);
 }
 
-.ex-card__info > img {
+.ex-card__img {
   align-self: flex-start;
 }
 
-.ex-card__info h2 {
+.ex-card__name {
   color: var(--heading-and-btn-clr);
 }
 
-.ex-card p {
+.ex-card__description {
   color: var(--ex-card-p-clr);
 }
 
