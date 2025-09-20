@@ -1,10 +1,25 @@
 const elements = {
   filterTabs: document.querySelectorAll(".filters-container > .filter-tab"),
   ExtensionsContainer: document.getElementById("extentions-container"),
+  removedTabNotif: document.querySelector("#filter-removed span"),
 };
 let activeFilterTab = document.querySelector(".filter-tab--selected");
 let appData = null;
 let cardTemplate = null;
+let removedCount = 0;
+
+function updateRemovedTabNotif(change) {
+  if (
+    (removedCount === 0 && change === "increment") ||
+    (removedCount === 1 && change === "decrement")
+  ) {
+    elements.removedTabNotif.classList.toggle("hide")
+  };
+  if (change === "increment") {
+    removedCount += 1;
+    elements.removedTabNotif.innerText = removedCount;
+  }
+}
 
 function addOptionsHandler() {
   const extensionNodes = document.querySelectorAll(".ex-card");
@@ -16,7 +31,7 @@ function addOptionsHandler() {
 
     removeBtn.addEventListener("click", () => {
       appData[nodeIndex].isRemoved = true;
-      // To be implemented: updated removed notif
+      updateRemovedTabNotif("increment");
       extensionNode.remove();
     });
     activeBtn.addEventListener("click", () => {

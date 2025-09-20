@@ -318,7 +318,6 @@ h1 {
   top: -50%;
   right: 0;
   transform: translate(25%, 50%);
-  display: block;
 }
 
 .removed-tab.filter-tab--selected > span {
@@ -409,6 +408,11 @@ h1 {
     .ex-card-remove-btn
   ):focus-visible {
   background-color: var(--btns-focus-visible-bg-clr);
+}
+
+/* Utility Classes */
+.hide {
+  display: none;
 }
 
 /* Tablet Layout */
