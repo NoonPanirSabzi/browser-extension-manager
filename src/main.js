@@ -6,6 +6,28 @@ let activeFilterTab = document.querySelector(".filter-tab--selected");
 let appData = null;
 let cardTemplate = null;
 
+function addOptionsHandler() {
+  const extensionNodes = document.querySelectorAll(".ex-card");
+  extensionNodes.forEach((extensionNode) => {
+    const nodeName = extensionNode.querySelector(".ex-card__name").innerText;
+    const removeBtn = extensionNode.querySelector(".ex-card-remove-btn");
+    const activeBtn = extensionNode.querySelector(".toggle-switch .slider");
+    const nodeIndex = appData.findIndex((elm) => elm.name === nodeName);
+
+    removeBtn.addEventListener("click", () => {
+      appData[nodeIndex].isRemoved = true;
+      // To be implemented: updated removed notif
+      extensionNode.remove();
+    });
+    activeBtn.addEventListener("click", () => {
+      appData[nodeIndex].isActive = !appData[nodeIndex].isActive;
+      if ("Active-Inactive".includes(activeFilterTab.innerText)) {
+        extensionNode.remove();
+      }
+    });
+  });
+}
+
 function showFilteredData(data) {
   let HTML = "";
   data.forEach((extension) => {
@@ -17,6 +39,7 @@ function showFilteredData(data) {
     HTML += extensionHTML;
   });
   elements.ExtensionsContainer.innerHTML = HTML;
+  addOptionsHandler();
 }
 
 function handleData() {
