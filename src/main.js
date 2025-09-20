@@ -9,16 +9,11 @@ let cardTemplate = null;
 function showFilteredData(data) {
   let HTML = "";
   data.forEach((extension) => {
-    let extensionHTML = cardTemplate.replaceAll("name-here", extension.name);
-    extensionHTML = extensionHTML.replaceAll("logo-here", extension.logo);
-    extensionHTML = extensionHTML.replaceAll(
-      "description-here",
-      extension.description
-    );
-    extensionHTML = extensionHTML.replaceAll(
-      "isActive-here",
-      extension.isActive ? " checked" : ""
-    );
+    let extensionHTML = cardTemplate
+      .replaceAll("name-here", extension.name)
+      .replaceAll("logo-here", extension.logo)
+      .replaceAll("description-here", extension.description)
+      .replaceAll("isActive-here", extension.isActive ? " checked" : "");
     HTML += extensionHTML;
   });
   elements.ExtensionsContainer.innerHTML = HTML;
