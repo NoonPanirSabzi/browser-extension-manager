@@ -6,6 +6,7 @@ const elements = {
 let activeFilterTab = document.querySelector(".filter-tab--selected");
 let appData = null;
 let cardTemplate = null;
+let removedCardTemplate = null;
 let removedCount = 0;
 
 function updateRemovedTabNotif(change) {
@@ -13,12 +14,30 @@ function updateRemovedTabNotif(change) {
     (removedCount === 0 && change === "increment") ||
     (removedCount === 1 && change === "decrement")
   ) {
-    elements.removedTabNotif.classList.toggle("hide")
-  };
+    elements.removedTabNotif.classList.toggle("hide");
+  }
   if (change === "increment") {
     removedCount += 1;
     elements.removedTabNotif.innerText = removedCount;
+  } else if (change === "decrement") {
+    removedCount -= 1;
+    elements.removedTabNotif.innerText = removedCount;
   }
+}
+
+function addInstallerHandlers() {
+  const extensionNodes = document.querySelectorAll(".ex-card");
+  extensionNodes.forEach((extensionNode) => {
+    const nodeName = extensionNode.querySelector(".ex-card__name").innerText;
+    const installBtn = extensionNode.querySelector(".ex-card-install-btn");
+    const nodeIndex = appData.findIndex((elm) => elm.name === nodeName);
+
+    installBtn.addEventListener("click", () => {
+      appData[nodeIndex].isRemoved = false;
+      updateRemovedTabNotif("decrement");
+      extensionNode.remove();
+    });
+  });
 }
 
 function addOptionsHandler() {
@@ -46,7 +65,11 @@ function addOptionsHandler() {
 function showFilteredData(data) {
   let HTML = "";
   data.forEach((extension) => {
-    let extensionHTML = cardTemplate
+    let extensionHTML =
+      activeFilterTab.id === "filter-removed"
+        ? removedCardTemplate
+        : cardTemplate;
+    extensionHTML = extensionHTML
       .replaceAll("name-here", extension.name)
       .replaceAll("logo-here", extension.logo)
       .replaceAll("description-here", extension.description)
@@ -54,7 +77,11 @@ function showFilteredData(data) {
     HTML += extensionHTML;
   });
   elements.ExtensionsContainer.innerHTML = HTML;
-  addOptionsHandler();
+  if (activeFilterTab.id === "filter-removed") {
+    addInstallerHandlers();
+  } else {
+    addOptionsHandler();
+  }
 }
 
 function handleData() {
@@ -86,12 +113,18 @@ const dataPromise = fetch("./assets/data.json").then((r) => r.json());
 const templatePromise = fetch("./assets/card-template.html").then((r) =>
   r.text()
 );
+const removedTemplatePromise = fetch(
+  "./assets/removed-card-template.html"
+).then((r) => r.text());
 
-Promise.all([dataPromise, templatePromise]).then(([data, template]) => {
-  appData = data;
-  cardTemplate = template;
-  handleData();
-});
+Promise.all([dataPromise, templatePromise, removedTemplatePromise]).then(
+  ([data, template, removedTemplate]) => {
+    appData = data;
+    cardTemplate = template;
+    removedCardTemplate = removedTemplate;
+    handleData();
+  }
+);
 
 // Components Logic
 elements.filterTabs.forEach((filterTab) => {

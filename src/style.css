@@ -99,9 +99,9 @@
   --ex-card-box-shadow: 0 0.125rem 0.125rem 0 rgba(194, 206, 225, 0.2),
     0 0.0625rem 0.3125rem 0.0625rem rgba(194, 206, 225, 0.22);
   --ex-card-p-clr: var(--color-neutral-600);
-  --ex-card-remove-btn-border: 0.0625rem solid var(--color-neutral-300);
-  --ex-card-remove-btn-hover-bg-clr: var(--color-red-700);
-  --ex-card-remove-btn-hover-clr: var(--color-neutral-0);
+  --ex-card-btn-border: 0.0625rem solid var(--color-neutral-300);
+  --ex-card-btn-hover-bg-clr: var(--color-red-700);
+  --ex-card-btn-hover-clr: var(--color-neutral-0);
   --ex-card-toggle-switch-bg-clr: var(--color-neutral-300);
   --ex-card-toggle-switch-checked-bg-clr: var(--color-red-700);
   --btns-focus-visible-bg-clr: var(--color-neutral-100);
@@ -327,20 +327,21 @@ h1 {
   box-shadow: 0 0.0625rem 0.125rem rgb(184, 196, 215);
 }
 
-.ex-card-remove-btn {
+.ex-card-remove-btn,
+.ex-card-install-btn {
   background-color: transparent;
   padding-inline: var(--spacing-200);
   padding-block: var(--spacing-100);
   border-radius: var(--radius-full);
-  border: var(--ex-card-remove-btn-border);
+  border: var(--ex-card-btn-border);
   color: var(--heading-and-btn-clr);
   cursor: pointer;
 }
 
-.ex-card-remove-btn:hover {
+:is(.ex-card-remove-btn, .ex-card-install-btn):hover {
   border-color: transparent;
-  background-color: var(--ex-card-remove-btn-hover-bg-clr);
-  color: var(--ex-card-remove-btn-hover-clr);
+  background-color: var(--ex-card-btn-hover-bg-clr);
+  color: var(--ex-card-btn-hover-clr);
 }
 
 .toggle-switch {
@@ -393,7 +394,12 @@ h1 {
   background-color: var(--color-red-500);
 }
 
-:is(.tgl-theme-btn, .filter-tab, .ex-card-remove-btn):focus-visible,
+:is(
+    .tgl-theme-btn,
+    .filter-tab,
+    .ex-card-remove-btn,
+    .ex-card-install-btn
+  ):focus-visible,
 .toggle-switch > input:focus-visible + .slider {
   border-color: transparent;
   outline-offset: 0.125rem;
@@ -405,7 +411,8 @@ h1 {
 :where(
     .tgl-theme-btn,
     .filter-tab:not(.filter-tab--selected),
-    .ex-card-remove-btn
+    .ex-card-remove-btn,
+    .ex-card-install-btn
   ):focus-visible {
   background-color: var(--btns-focus-visible-bg-clr);
 }
