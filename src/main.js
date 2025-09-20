@@ -48,10 +48,18 @@ function handleData() {
       showFilteredData(appData.filter((extension) => !extension.isRemoved));
       break;
     case "filter-active":
-      showFilteredData(appData.filter((extension) => extension.isActive));
+      showFilteredData(
+        appData.filter(
+          (extension) => extension.isActive && !extension.isRemoved
+        )
+      );
       break;
     case "filter-inactive":
-      showFilteredData(appData.filter((extension) => !extension.isActive));
+      showFilteredData(
+        appData.filter(
+          (extension) => !extension.isActive && !extension.isRemoved
+        )
+      );
       break;
     case "filter-removed":
       showFilteredData(appData.filter((extension) => extension.isRemoved));
