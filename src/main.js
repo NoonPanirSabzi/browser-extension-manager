@@ -4,40 +4,22 @@ const elements = {
 };
 let activeFilterTab = document.querySelector(".filter-tab--selected");
 let appData = null;
+let cardTemplate = null;
 
 function showFilteredData(data) {
   let HTML = "";
   data.forEach((extension) => {
-    const name = extension.name;
-    const logo = extension.logo;
-    const description = extension.description;
-    const isActive = extension.isActive;
-    HTML += `
-<article class="ex-card">
-  <div class="ex-card__info">
-    <img
-      src="${logo}"
-      alt="${name} logo"
-      class="ex-card__img"
-    />
-    <div class="flex-clmn">
-      <h2 class="text-preset-2 ex-card__name">${name}</h2>
-      <p class="text-preset-5 ex-card__description">
-        ${description}
-      </p>
-    </div>
-  </div>
-  <div class="ex-card__actions">
-    <button type="button" class="ex-card-remove-btn text-preset-6">
-      Remove
-    </button>
-    <label class="toggle-switch">
-      <input type="checkbox"${isActive ? "checked" : ""} />
-      <span class="slider"></span>
-    </label>
-  </div>
-</article>
-    `;
+    let extensionHTML = cardTemplate.replaceAll("name-here", extension.name);
+    extensionHTML = extensionHTML.replaceAll("logo-here", extension.logo);
+    extensionHTML = extensionHTML.replaceAll(
+      "description-here",
+      extension.description
+    );
+    extensionHTML = extensionHTML.replaceAll(
+      "isActive-here",
+      extension.isActive ? " checked" : ""
+    );
+    HTML += extensionHTML;
   });
   elements.ExtensionsContainer.innerHTML = HTML;
 }
@@ -59,12 +41,16 @@ function handleData() {
   }
 }
 
-fetch("./data.json")
-  .then((response) => response.json())
-  .then((data) => {
-    appData = data;
-    handleData();
-  });
+const dataPromise = fetch("./assets/data.json").then((r) => r.json());
+const templatePromise = fetch("./assets/card-template.html").then((r) =>
+  r.text()
+);
+
+Promise.all([dataPromise, templatePromise]).then(([data, template]) => {
+  appData = data;
+  cardTemplate = template;
+  handleData();
+});
 
 // Components Logic
 elements.filterTabs.forEach((filterTab) => {
