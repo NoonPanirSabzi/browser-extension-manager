@@ -261,6 +261,16 @@ h1 {
   align-items: center;
 }
 
+.empty-page-msg {
+  max-inline-size: 25rem;
+  text-align: center;
+  background-color: var(--ex-card-bg-clr);
+  border: var(--ex-card-border);
+  border-radius: var(--radius-8);
+  padding: var(--spacing-250);
+  margin-inline: auto;
+}
+
 /* Interactive Components */
 .tgl-theme-btn {
   all: unset;

@@ -2,6 +2,7 @@ const elements = {
   filterTabs: document.querySelectorAll(".filters-container > .filter-tab"),
   ExtensionsContainer: document.getElementById("extentions-container"),
   removedTabNotif: document.querySelector("#filter-removed span"),
+  emptyPageMsg: document.getElementById("empty-page-msg"),
 };
 let activeFilterTab = document.querySelector(".filter-tab--selected");
 let appData = null;
@@ -25,6 +26,29 @@ function updateRemovedTabNotif(change) {
   }
 }
 
+function showEmptyDataMsg() {
+  const tab = activeFilterTab.innerText;
+  let msg;
+  switch (tab) {
+    case "All":
+      msg = `There is nothing to show<br>
+      You have removed <b>All</b> extensions! 🤨`;
+      break;
+    case "Active":
+      msg = `No <b>Active</b> extension is available 🙄`;
+      break;
+    case "Inactive":
+      msg = `Don't look! 🙈<br>
+      Nothing to see here`;
+      break;
+    case "Removed":
+      msg = `There isn't any <b>Removed</b> extension 🥳`;
+      break;
+  }
+  elements.emptyPageMsg.innerHTML = msg;
+  elements.emptyPageMsg.classList.remove("hide");
+}
+
 function addInstallerHandlers() {
   const extensionNodes = document.querySelectorAll(".ex-card");
   extensionNodes.forEach((extensionNode) => {
@@ -36,6 +60,9 @@ function addInstallerHandlers() {
       appData[nodeIndex].isRemoved = false;
       updateRemovedTabNotif("decrement");
       extensionNode.remove();
+      if (elements.ExtensionsContainer.innerText === "") {
+        showEmptyDataMsg();
+      }
     });
   });
 }
@@ -52,17 +79,30 @@ function addOptionsHandler() {
       appData[nodeIndex].isRemoved = true;
       updateRemovedTabNotif("increment");
       extensionNode.remove();
+      if (elements.ExtensionsContainer.innerText === "") {
+        showEmptyDataMsg();
+      }
     });
     activeBtn.addEventListener("click", () => {
       appData[nodeIndex].isActive = !appData[nodeIndex].isActive;
       if ("Active-Inactive".includes(activeFilterTab.innerText)) {
         extensionNode.remove();
       }
+      if (elements.ExtensionsContainer.innerText === "") {
+        showEmptyDataMsg();
+      }
     });
   });
 }
 
 function showFilteredData(data) {
+  if (data.length === 0) {
+    elements.ExtensionsContainer.innerHTML = "";
+    showEmptyDataMsg();
+    return;
+  }
+  elements.emptyPageMsg.classList.add("hide");
+
   let HTML = "";
   data.forEach((extension) => {
     let extensionHTML =
