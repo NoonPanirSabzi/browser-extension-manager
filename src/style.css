@@ -221,7 +221,7 @@ h1 {
   max-inline-size: 23.875rem;
   min-block-size: 12.5rem;
   padding: var(--spacing-250);
-  background-color: var(--color-neutral-0);
+  background-color: var(--ex-card-bg-clr);
   border: var(--ex-card-border);
   border-radius: var(--radius-20);
   box-shadow: var(--ex-card-box-shadow);
