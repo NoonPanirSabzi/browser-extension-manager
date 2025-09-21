@@ -204,10 +204,18 @@ function updateThemePictures(theme) {
 
 elements.tglThemeBtn.addEventListener("click", () => {
   const current =
-    elements.root.getAttribute("data-theme") ??
+    localStorage.getItem("theme") ??
     (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
   const next = current === "light" ? "dark" : "light";
 
+  localStorage.setItem("theme", next)
   updateThemePictures(next);
   elements.root.setAttribute("data-theme", next);
 });
+
+// on Load check theme
+const loadTheme = localStorage.getItem("theme");
+if (loadTheme) {
+  updateThemePictures(loadTheme)
+  elements.root.setAttribute("data-theme", loadTheme)
+}
