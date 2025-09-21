@@ -112,6 +112,73 @@
 /* Theme Dark (System) */
 @media (prefers-color-scheme: dark) {
   :root {
+    --body-bg: var(--gradient-dark);
+    --header-bg-clr: var(--color-neutral-800);
+    --header-border: unset;
+    --header-box-shadow: unset;
+    --tgl-theme-btn-bg-clr: var(--color-neutral-700);
+    --tgl-theme-btn-hover-bg-clr: var(--color-neutral-600);
+    --heading-and-btn-clr: var(--color-neutral-0);
+    --filter-tab-bg-clr: var(--color-neutral-700);
+    --filter-tab-box-shadow: unset;
+    --filter-tab-border: 0.0625rem solid var(--color-neutral-600);
+    --filter-tab-selected-bg-clr: var(--color-red-400);
+    --filter-tab-selected-clr: var(--color-neutral-900);
+    --filter-tab-hover-bg-clr: var(--color-neutral-600);
+    --filter-tab-hover-clr: var(--color-neutral-0);
+    --removed-tab-before-clr: var(--color-neutral-0);
+    --removed-tab-before-bg-clr: var(--color-red-500);
+    --removed-tab-before-selected-border: unset;
+    --removed-tab-before-selected-shadow: unset;
+    --ex-card-bg-clr: var(--color-neutral-800);
+    --ex-card-border: 0.0625rem solid var(--color-neutral-600);
+    --ex-card-box-shadow: unset;
+    --ex-card-p-clr: var(--color-neutral-300);
+    --ex-card-btn-border: 0.0625rem solid var(--color-neutral-600);
+    --ex-card-btn-hover-bg-clr: var(--color-red-400);
+    --ex-card-btn-hover-clr: var(--color-neutral-900);
+    --ex-card-toggle-switch-bg-clr: var(--color-neutral-600);
+    --ex-card-toggle-switch-checked-bg-clr: var(--color-red-400);
+    --btns-focus-visible-bg-clr: var(--color-neutral-600);
+  }
+}
+
+/* Theme Forced */
+:root[data-theme="light"] {
+  --body-bg: var(--gradient-light);
+  --header-bg-clr: var(--color-neutral-0);
+  --header-border: 0.0625rem solid var(--color-neutral-200);
+  --header-box-shadow: 0 0.125rem 0.1875rem #d9e5f4;
+  --tgl-theme-btn-bg-clr: var(--color-neutral-100);
+  --tgl-theme-btn-hover-bg-clr: var(--color-neutral-300);
+  --heading-and-btn-clr: var(--color-neutral-900);
+  --filter-tab-bg-clr: var(--color-neutral-0);
+  --filter-tab-box-shadow: 0 0.0625rem 0.125rem rgba(184, 196, 215, 0.4);
+  --filter-tab-border: 0.0625rem solid var(--color-neutral-200);
+  --filter-tab-selected-bg-clr: var(--color-red-700);
+  --filter-tab-selected-clr: var(--color-neutral-0);
+  --filter-tab-hover-bg-clr: rgba(251, 253, 254, 0.3);
+  --filter-tab-hover-clr: rgba(9, 21, 64, 0.7);
+  --removed-tab-before-clr: var(--color-neutral-0);
+  --removed-tab-before-bg-clr: var(--color-red-700);
+  --removed-tab-before-selected-bg-clr: var(--color-neutral-0);
+  --removed-tab-before-selected-clr: var(--color-neutral-900);
+  --removed-tab-before-selected-border: 0.0625rem solid var(--color-neutral-200);
+  --removed-tab-before-selected-shadow: 0 0.0625rem 0.125rem rgb(184, 196, 215);
+  --ex-card-bg-clr: var(--color-neutral-0);
+  --ex-card-border: 0.0625rem solid var(--color-neutral-200);
+  --ex-card-box-shadow: 0 0.125rem 0.125rem 0 rgba(194, 206, 225, 0.2),
+    0 0.0625rem 0.3125rem 0.0625rem rgba(194, 206, 225, 0.22);
+  --ex-card-p-clr: var(--color-neutral-600);
+  --ex-card-btn-border: 0.0625rem solid var(--color-neutral-300);
+  --ex-card-btn-hover-bg-clr: var(--color-red-700);
+  --ex-card-btn-hover-clr: var(--color-neutral-0);
+  --ex-card-toggle-switch-bg-clr: var(--color-neutral-300);
+  --ex-card-toggle-switch-checked-bg-clr: var(--color-red-700);
+  --btns-focus-visible-bg-clr: var(--color-neutral-100);
+}
+
+:root[data-theme="dark"] {
   --body-bg: var(--gradient-dark);
   --header-bg-clr: var(--color-neutral-800);
   --header-border: unset;
@@ -129,10 +196,10 @@
   --removed-tab-before-clr: var(--color-neutral-0);
   --removed-tab-before-bg-clr: var(--color-red-500);
   --removed-tab-before-selected-border: unset;
-  --removed-tab-before-selected-shadow: unset; 
+  --removed-tab-before-selected-shadow: unset;
   --ex-card-bg-clr: var(--color-neutral-800);
   --ex-card-border: 0.0625rem solid var(--color-neutral-600);
-  --ex-card-box-shadow:unset;
+  --ex-card-box-shadow: unset;
   --ex-card-p-clr: var(--color-neutral-300);
   --ex-card-btn-border: 0.0625rem solid var(--color-neutral-600);
   --ex-card-btn-hover-bg-clr: var(--color-red-400);
@@ -140,7 +207,6 @@
   --ex-card-toggle-switch-bg-clr: var(--color-neutral-600);
   --ex-card-toggle-switch-checked-bg-clr: var(--color-red-400);
   --btns-focus-visible-bg-clr: var(--color-neutral-600);
-  }
 }
 
 /* Typography */

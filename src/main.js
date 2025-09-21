@@ -3,6 +3,8 @@ const elements = {
   ExtensionsContainer: document.getElementById("extentions-container"),
   removedTabNotif: document.querySelector("#filter-removed span"),
   emptyPageMsg: document.getElementById("empty-page-msg"),
+  tglThemeBtn: document.querySelector(".tgl-theme-btn"),
+  root: document.documentElement,
 };
 let activeFilterTab = document.querySelector(".filter-tab--selected");
 let appData = null;
@@ -181,4 +183,31 @@ elements.filterTabs.forEach((filterTab) => {
       handleData();
     }
   });
+});
+
+/* ---------- Theme ----------*/
+function updateThemePictures(theme) {
+  const pictures = document.querySelectorAll("picture");
+  pictures.forEach((picture) => {
+    const pictureSrc = picture.querySelector("source[data-theme]");
+    const darkSrc = picture
+      .querySelector("source[media]")
+      .getAttribute("srcset");
+    const lightSrc = picture.querySelector("img").getAttribute("src");
+    if (theme === "light") {
+      pictureSrc.srcset = lightSrc;
+    } else {
+      pictureSrc.srcset = darkSrc;
+    }
+  });
+}
+
+elements.tglThemeBtn.addEventListener("click", () => {
+  const current =
+    elements.root.getAttribute("data-theme") ??
+    (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  const next = current === "light" ? "dark" : "light";
+
+  updateThemePictures(next);
+  elements.root.setAttribute("data-theme", next);
 });
