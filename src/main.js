@@ -4,17 +4,14 @@ const elements = {
   removedTabNotif: document.querySelector("#filter-removed span"),
   emptyPageMsg: document.getElementById("empty-page-msg"),
   tglThemeBtn: document.querySelector(".tgl-theme-btn"),
-  filterAllTab: document.getElementById("filter-all"),
-  filterActiveTab: document.getElementById("filter-active"),
-  filterInactiveTab: document.getElementById("filter-inactive"),
-  filterRemovedTab: document.getElementById("filter-removed"),
   root: document.documentElement,
 };
-let activeFilterTab = document.querySelector(".filter-tab--selected").id;
+let activeFilterTab = null;
+let activeTabnode = null;
 let appData = null;
 let cardTemplate = null;
 let removedCardTemplate = null;
-let removedCount = 0;
+let removedCount = null;
 
 function updateRemovedTabNotif(change) {
   if (
@@ -30,6 +27,7 @@ function updateRemovedTabNotif(change) {
     removedCount -= 1;
     elements.removedTabNotif.innerText = removedCount;
   }
+  localStorage.setItem("removedCount", removedCount);
 }
 
 function showEmptyDataMsg() {
@@ -69,6 +67,7 @@ function addInstallerHandlers() {
       if (elements.ExtensionsContainer.innerText === "") {
         showEmptyDataMsg();
       }
+      localStorage.setItem("appData", JSON.stringify(appData));
     });
   });
 }
@@ -88,6 +87,7 @@ function addOptionsHandler() {
       if (elements.ExtensionsContainer.innerText === "") {
         showEmptyDataMsg();
       }
+      localStorage.setItem("appData", JSON.stringify(appData));
     });
     activeBtn.addEventListener("click", () => {
       appData[nodeIndex].isActive = !appData[nodeIndex].isActive;
@@ -97,6 +97,7 @@ function addOptionsHandler() {
       if (elements.ExtensionsContainer.innerText === "") {
         showEmptyDataMsg();
       }
+      localStorage.setItem("appData", JSON.stringify(appData));
     });
   });
 }
@@ -153,48 +154,6 @@ function handleData() {
   }
 }
 
-const dataPromise = fetch("./assets/data.json").then((r) => r.json());
-const templatePromise = fetch("./assets/card-template.html").then((r) =>
-  r.text()
-);
-const removedTemplatePromise = fetch(
-  "./assets/removed-card-template.html"
-).then((r) => r.text());
-
-Promise.all([dataPromise, templatePromise, removedTemplatePromise]).then(
-  ([data, template, removedTemplate]) => {
-    appData = data;
-    cardTemplate = template;
-    removedCardTemplate = removedTemplate;
-    handleData();
-  }
-);
-
-// Components Logic
-elements.filterTabs.forEach((filterTab) => {
-  filterTab.addEventListener("click", () => {
-    if (filterTab.id === activeFilterTab) {
-      return;
-    } else {
-      [
-        elements[
-          `filter${activeFilterTab[7].toUpperCase()}${activeFilterTab.slice(
-            8
-          )}Tab`
-        ],
-        filterTab,
-      ].forEach((tab) => {
-        tab.classList.toggle("filter-tab--selected");
-        tab.classList.toggle("text-preset-3");
-        tab.classList.toggle("text-preset-4");
-      });
-      activeFilterTab = filterTab.id;
-      handleData();
-    }
-  });
-});
-
-/* ---------- Theme ----------*/
 function updateThemePictures(theme) {
   const pictures = document.querySelectorAll("picture");
   pictures.forEach((picture) => {
@@ -211,20 +170,72 @@ function updateThemePictures(theme) {
   });
 }
 
-elements.tglThemeBtn.addEventListener("click", () => {
-  const current =
-    localStorage.getItem("theme") ??
-    (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-  const next = current === "light" ? "dark" : "light";
+function main() {
+  const dataPromise = fetch("./assets/data.json").then((r) => r.json());
+  const templatePromise = fetch("./assets/card-template.html").then((r) =>
+    r.text()
+  );
+  const removedTemplatePromise = fetch(
+    "./assets/removed-card-template.html"
+  ).then((r) => r.text());
 
-  localStorage.setItem("theme", next);
-  updateThemePictures(next);
-  elements.root.setAttribute("data-theme", next);
-});
+  Promise.all([dataPromise, templatePromise, removedTemplatePromise]).then(
+    ([data, template, removedTemplate]) => {
+      cardTemplate = template;
+      removedCardTemplate = removedTemplate;
+      // load data from localStorage if available:
+      appData = JSON.parse(localStorage.getItem("appData")) ?? data;
+      activeFilterTab = localStorage.getItem("activeFilterTab") ?? "filter-all";
+      activeTabnode = document.getElementById(activeFilterTab);
+      activeTabnode.classList.add("filter-tab--selected");
+      activeTabnode.classList.remove("text-preset-3");
+      activeTabnode.classList.add("text-preset-4");
+      removedCount = Number(localStorage.getItem("removedCount")) ?? 0;
+      if (removedCount != 0) {
+        elements.removedTabNotif.classList.remove("hide");
+        elements.removedTabNotif.innerText = removedCount;
+      }
+      handleData();
+    }
+  );
 
-// on Load check theme
-const loadTheme = localStorage.getItem("theme");
-if (loadTheme) {
-  updateThemePictures(loadTheme);
-  elements.root.setAttribute("data-theme", loadTheme);
+  // Components Logic
+  elements.filterTabs.forEach((filterTab) => {
+    filterTab.addEventListener("click", () => {
+      if (filterTab.id === activeFilterTab) {
+        return;
+      } else {
+        [activeTabnode, filterTab].forEach((tab) => {
+          tab.classList.toggle("filter-tab--selected");
+          tab.classList.toggle("text-preset-3");
+          tab.classList.toggle("text-preset-4");
+        });
+        activeTabnode = filterTab;
+        activeFilterTab = filterTab.id;
+        localStorage.setItem("activeFilterTab", filterTab.id);
+        handleData();
+      }
+    });
+  });
+
+  /* ---------- Theme --------- */
+  elements.tglThemeBtn.addEventListener("click", () => {
+    const current =
+      localStorage.getItem("theme") ??
+      (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    const next = current === "light" ? "dark" : "light";
+
+    localStorage.setItem("theme", next);
+    updateThemePictures(next);
+    elements.root.setAttribute("data-theme", next);
+  });
+
+  // on Load check theme
+  const loadTheme = localStorage.getItem("theme");
+  if (loadTheme) {
+    updateThemePictures(loadTheme);
+    elements.root.setAttribute("data-theme", loadTheme);
+  }
 }
+
+main();
