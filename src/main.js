@@ -4,9 +4,13 @@ const elements = {
   removedTabNotif: document.querySelector("#filter-removed span"),
   emptyPageMsg: document.getElementById("empty-page-msg"),
   tglThemeBtn: document.querySelector(".tgl-theme-btn"),
+  filterAllTab: document.getElementById("filter-all"),
+  filterActiveTab: document.getElementById("filter-active"),
+  filterInactiveTab: document.getElementById("filter-inactive"),
+  filterRemovedTab: document.getElementById("filter-removed"),
   root: document.documentElement,
 };
-let activeFilterTab = document.querySelector(".filter-tab--selected");
+let activeFilterTab = document.querySelector(".filter-tab--selected").id;
 let appData = null;
 let cardTemplate = null;
 let removedCardTemplate = null;
@@ -29,21 +33,21 @@ function updateRemovedTabNotif(change) {
 }
 
 function showEmptyDataMsg() {
-  const tab = activeFilterTab.innerText;
+  const tab = activeFilterTab;
   let msg;
   switch (tab) {
-    case "All":
+    case "filter-all":
       msg = `There is nothing to show<br>
       You have removed <b>All</b> extensions! 🤨`;
       break;
-    case "Active":
+    case "filter-active":
       msg = `No <b>Active</b> extension is available 🙄`;
       break;
-    case "Inactive":
+    case "filter-inactive":
       msg = `Don't look! 🙈<br>
       Nothing to see here`;
       break;
-    case "Removed":
+    case "filter-removed":
       msg = `There isn't any <b>Removed</b> extension 🥳`;
       break;
   }
@@ -87,7 +91,7 @@ function addOptionsHandler() {
     });
     activeBtn.addEventListener("click", () => {
       appData[nodeIndex].isActive = !appData[nodeIndex].isActive;
-      if ("Active-Inactive".includes(activeFilterTab.innerText)) {
+      if ("active-inactive".includes(activeFilterTab.slice(7))) {
         extensionNode.remove();
       }
       if (elements.ExtensionsContainer.innerText === "") {
@@ -108,9 +112,7 @@ function showFilteredData(data) {
   let HTML = "";
   data.forEach((extension) => {
     let extensionHTML =
-      activeFilterTab.id === "filter-removed"
-        ? removedCardTemplate
-        : cardTemplate;
+      activeFilterTab === "filter-removed" ? removedCardTemplate : cardTemplate;
     extensionHTML = extensionHTML
       .replaceAll("name-here", extension.name)
       .replaceAll("logo-here", extension.logo)
@@ -119,7 +121,7 @@ function showFilteredData(data) {
     HTML += extensionHTML;
   });
   elements.ExtensionsContainer.innerHTML = HTML;
-  if (activeFilterTab.id === "filter-removed") {
+  if (activeFilterTab === "filter-removed") {
     addInstallerHandlers();
   } else {
     addOptionsHandler();
@@ -127,7 +129,7 @@ function showFilteredData(data) {
 }
 
 function handleData() {
-  switch (activeFilterTab.id) {
+  switch (activeFilterTab) {
     case "filter-all":
       showFilteredData(appData.filter((extension) => !extension.isRemoved));
       break;
@@ -171,15 +173,22 @@ Promise.all([dataPromise, templatePromise, removedTemplatePromise]).then(
 // Components Logic
 elements.filterTabs.forEach((filterTab) => {
   filterTab.addEventListener("click", () => {
-    if (filterTab === activeFilterTab) {
+    if (filterTab.id === activeFilterTab) {
       return;
     } else {
-      [activeFilterTab, filterTab].forEach((tab) => {
+      [
+        elements[
+          `filter${activeFilterTab[7].toUpperCase()}${activeFilterTab.slice(
+            8
+          )}Tab`
+        ],
+        filterTab,
+      ].forEach((tab) => {
         tab.classList.toggle("filter-tab--selected");
         tab.classList.toggle("text-preset-3");
         tab.classList.toggle("text-preset-4");
       });
-      activeFilterTab = filterTab;
+      activeFilterTab = filterTab.id;
       handleData();
     }
   });
