@@ -31,9 +31,8 @@ function updateRemovedTabNotif(change) {
 }
 
 function showEmptyDataMsg() {
-  const tab = activeFilterTab;
   let msg;
-  switch (tab) {
+  switch (activeFilterTab) {
     case "filter-all":
       msg = `There is nothing to show<br>
       You have removed <b>All</b> extensions! 🤨`;
@@ -53,53 +52,57 @@ function showEmptyDataMsg() {
   elements.emptyPageMsg.classList.remove("hide");
 }
 
-function addInstallerHandlers() {
-  const extensionNodes = document.querySelectorAll(".ex-card");
-  extensionNodes.forEach((extensionNode) => {
-    const nodeName = extensionNode.querySelector(".ex-card__name").innerText;
-    const installBtn = extensionNode.querySelector(".ex-card-install-btn");
-    const nodeIndex = appData.findIndex((elm) => elm.name === nodeName);
-
-    installBtn.addEventListener("click", () => {
-      appData[nodeIndex].isRemoved = false;
-      updateRemovedTabNotif("decrement");
-      extensionNode.remove();
-      if (elements.ExtensionsContainer.innerText === "") {
-        showEmptyDataMsg();
-      }
-      localStorage.setItem("appData", JSON.stringify(appData));
-    });
-  });
+function handleRemoveExtension(extension) {
+  const name = extension.querySelector(".ex-card__name").innerText;
+  extension.remove();
+  updateRemovedTabNotif("increment");
+  if (elements.ExtensionsContainer.innerText === "") {
+    showEmptyDataMsg();
+  }
+  const nodeIndex = appData.findIndex((elm) => elm.name === name);
+  appData[nodeIndex].isRemoved = true;
+  localStorage.setItem("appData", JSON.stringify(appData));
 }
 
-function addOptionsHandler() {
-  const extensionNodes = document.querySelectorAll(".ex-card");
-  extensionNodes.forEach((extensionNode) => {
-    const nodeName = extensionNode.querySelector(".ex-card__name").innerText;
-    const removeBtn = extensionNode.querySelector(".ex-card-remove-btn");
-    const activeBtn = extensionNode.querySelector(".toggle-switch .slider");
-    const nodeIndex = appData.findIndex((elm) => elm.name === nodeName);
+function handleInstallExtension(extension) {
+  const name = extension.querySelector(".ex-card__name").innerText;
+  const nodeIndex = appData.findIndex((elm) => elm.name === name);
+  appData[nodeIndex].isRemoved = false;
+  updateRemovedTabNotif("decrement");
+  extension.remove();
+  if (elements.ExtensionsContainer.innerText === "") {
+    showEmptyDataMsg();
+  }
+  localStorage.setItem("appData", JSON.stringify(appData));
+}
 
-    removeBtn.addEventListener("click", () => {
-      appData[nodeIndex].isRemoved = true;
-      updateRemovedTabNotif("increment");
-      extensionNode.remove();
-      if (elements.ExtensionsContainer.innerText === "") {
-        showEmptyDataMsg();
-      }
-      localStorage.setItem("appData", JSON.stringify(appData));
-    });
-    activeBtn.addEventListener("click", () => {
-      appData[nodeIndex].isActive = !appData[nodeIndex].isActive;
-      if ("active-inactive".includes(activeFilterTab.slice(7))) {
-        extensionNode.remove();
-      }
-      if (elements.ExtensionsContainer.innerText === "") {
-        showEmptyDataMsg();
-      }
-      localStorage.setItem("appData", JSON.stringify(appData));
-    });
-  });
+function handleToggleExtension(extension) {
+  const name = extension.querySelector(".ex-card__name").innerText;
+  const nodeIndex = appData.findIndex((elm) => elm.name === name);
+  appData[nodeIndex].isActive = !appData[nodeIndex].isActive;
+
+  if (
+    activeFilterTab === "filter-active" ||
+    activeFilterTab === "filter-inactive"
+  ) {
+    extension.remove();
+  }
+
+  if (elements.ExtensionsContainer.innerText === "") {
+    showEmptyDataMsg();
+  }
+  localStorage.setItem("appData", JSON.stringify(appData));
+}
+
+function handleContainerClick(e) {
+  const target = e.target;
+  if (target.matches(".ex-card-remove-btn")) {
+    handleRemoveExtension(target.closest(".ex-card"));
+  } else if (target.matches(".toggle-switch .slider")) {
+    handleToggleExtension(target.closest(".ex-card"));
+  } else if (target.matches(".ex-card-install-btn")) {
+    handleInstallExtension(target.closest(".ex-card"));
+  }
 }
 
 function showFilteredData(data) {
@@ -122,11 +125,6 @@ function showFilteredData(data) {
     HTML += extensionHTML;
   });
   elements.ExtensionsContainer.innerHTML = HTML;
-  if (activeFilterTab === "filter-removed") {
-    addInstallerHandlers();
-  } else {
-    addOptionsHandler();
-  }
 }
 
 function handleData() {
@@ -196,6 +194,10 @@ function main() {
         elements.removedTabNotif.innerText = removedCount;
       }
       handleData();
+      elements.ExtensionsContainer.addEventListener(
+        "click",
+        handleContainerClick
+      );
     }
   );
 
