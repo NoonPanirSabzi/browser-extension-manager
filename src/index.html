@@ -7,7 +7,10 @@
     <meta property="og:title" content="extensions manager | Amin" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://i.imgur.com/ovc7ssD.jpeg" />
-    <meta property="og:description" content="UI for managing your browser extensions | Amin" />
+    <meta
+      property="og:description"
+      content="UI for managing your browser extensions | Amin"
+    />
     <meta property="og:url" content="https://extentions-manager.netlify.app" />
 
     <link
@@ -87,6 +90,13 @@
           </button>
         </div>
       </section>
+      <dialog class="confirm-dialog" id="confirm-dialog">
+        <p class="text-preset-3" id="confirm-dialog-txt">Remove TabMaster Pro?</p>
+        <div class="dialog-btns">
+          <button type="button" class="cancel-btn text-preset-4" id="no-btn">No</button>
+          <button type="button" class="confirm-btn text-preset-4" id="yes-btn">Yes</button>
+        </div>
+      </dialog>
       <section id="extentions-container" class="extentions-container"></section>
       <p class="empty-page-msg text-preset-3 hide" id="empty-page-msg"></p>
     </main>

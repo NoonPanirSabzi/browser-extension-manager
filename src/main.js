@@ -4,6 +4,10 @@ const elements = {
   removedTabNotif: document.querySelector("#filter-removed span"),
   emptyPageMsg: document.getElementById("empty-page-msg"),
   tglThemeBtn: document.querySelector(".tgl-theme-btn"),
+  confirmDialog: document.getElementById("confirm-dialog"),
+  confirmDialogTxt: document.getElementById("confirm-dialog-txt"),
+  noBtn: document.getElementById("no-btn"),
+  yesBtn: document.getElementById("yes-btn"),
   root: document.documentElement,
 };
 let activeFilterTab = null;
@@ -12,6 +16,10 @@ let appData = null;
 let cardTemplate = null;
 let removedCardTemplate = null;
 let removedCount = null;
+let action = {
+  extension: null,
+  do: null,
+};
 
 function updateRemovedTabNotif(change) {
   if (
@@ -96,12 +104,20 @@ function handleToggleExtension(extension) {
 
 function handleContainerClick(e) {
   const target = e.target;
+  const extension = target.closest(".ex-card");
+  const extensionName = extension?.querySelector(".ex-card__name").innerText;
   if (target.matches(".ex-card-remove-btn")) {
-    handleRemoveExtension(target.closest(".ex-card"));
+    elements.confirmDialogTxt.innerText = `Remove ${extensionName}? 😭`;
+    elements.confirmDialog.showModal();
+    action.extension = extension;
+    action.do = "remove";
   } else if (target.matches(".toggle-switch .slider")) {
     handleToggleExtension(target.closest(".ex-card"));
   } else if (target.matches(".ex-card-install-btn")) {
-    handleInstallExtension(target.closest(".ex-card"));
+    elements.confirmDialogTxt.innerText = `Install ${extensionName}? 😀`;
+    elements.confirmDialog.showModal();
+    action.extension = extension;
+    action.do = "install";
   }
 }
 
@@ -200,6 +216,19 @@ function main() {
       );
     }
   );
+
+  elements.noBtn.addEventListener("click", () => {
+    elements.confirmDialog.close();
+  });
+
+  elements.yesBtn.addEventListener("click", () => {
+    elements.confirmDialog.close();
+    if (action.do === "remove") {
+      handleRemoveExtension(action.extension);
+    } else {
+      handleInstallExtension(action.extension);
+    }
+  });
 
   // Components Logic
   elements.filterTabs.forEach((filterTab) => {
